@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<script type="text/javascript">
+	(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
+	
+	// TEST ENV =>
+	branch.init('key_test_ame6Eisey9QvXqgv3w4H1imhqAn5ltzm');
+	
+	// PROD ENV =>
+	//branch.init('key_live_fooXEnzmEWHs0Fbu7u6QHkobBEi8nqa1');
+	
+
+	branch.banner({
+		//icon: 'http://icons.iconarchive.com/icons/wineass/ios7-redesign/512/Appstore-icon.png',
+		icon: 'https://cdn2.hubspot.net/hub/480264/file-2468972317-png/Image/logo_icon_black.png',
+		title: 'Branch Demo App',
+		description: 'The Branch demo app!'
+	}, {});
+	
+	function sendSMS(form) {
+                var phone = form.phone.value;
+                var linkData = {
+                    tags: [],
+                    channel: 'Website',
+                    feature: 'TextMeTheApp',
+                    data: {
+                        'foo': 'bar'
+                    }
+                };
+                var options = {};
+                var callback = function(err, result) {
+                    if (err) {
+                        alert("Sorry, something went wrong.");
+                    }
+                    else {
+                        alert("SMS sent!");
+                    }
+                };
+                branch.sendSMS(phone, linkData, options, callback);
+                form.phone.value = "";
+            }
+</script>
+
+</head>
+
+<body>
+<div class="container">
+	<h1>Send SMS</h1>
+	<form onsubmit="sendSMS(this); return false;" class="form-inline">
+		<div class="form-group">
+			<label for="phone">Phone</label>
+			<input id="phone" name="phone" type="tel" placeholder="(650) 123-4567" class="form-control" />
+		</div>
+		<div class="form-group">
+			<!-- <input type="submit"/> -->
+			<button type="submit" class="btn btn-default">Submit</button>
+		</div>
+	</form>
+</div>
+</body>
+</html>
